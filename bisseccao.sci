@@ -5,10 +5,12 @@ function y = fun(d)
     y = d.^2 - 4
 endfunction
 function [raiz, iteracoes, erro] = bisseccao(a, b, p)
+    x = a
     if (fun(a)*fun(b)<0) then // Verificação Inicial para ver se f(a)*f(b) < 0
         er = 10^-p // Definindo um erro inicial
         inc = 0 // iniciando o contador de incrementação
         while(er >= 10^-p) // laço para realizar as operações
+            xold = x
             x = (a+b)/2 // calculando o valor médio
             if(fun(a)*fun(x)==0 | fun(b)*fun(x)==0) then // primeira condição, verifica se a f(x) * f(a) ou f(b) é igual a zero, se for quer dizer que foi achada uma raiz
                 break
@@ -17,7 +19,9 @@ function [raiz, iteracoes, erro] = bisseccao(a, b, p)
                     else  // se f(a)*f(x) não for menor que 0 o x deve ser salvo em a
                         a = x
             end
-            er = abs((b-a)/(b)) //calculo do erro
+            er = abs((xold-x)/(x)) //calculo do erro
+            disp("Erro:")
+            disp(er)
             inc = inc+1 //incrementando
         end
         raiz = x
