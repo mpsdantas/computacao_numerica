@@ -1,11 +1,12 @@
 function [B, d] = prepararMatriz(A,b)
     [l c] = size(B)
     for i = 1:l
-        B(:,i) = A(:,i)/A(i,i);
+        B(i,:) = A(i,:)/A(i,i);
         d(i) = b(i)/A(i,i)
     end
     B = B - eye(l,c);
     B = -B
+    disp(B)
 endfunction
 function [i,erro,x] = jacob(A,b,p,imax)
     [B, d] = prepararMatriz(A,b);
@@ -21,4 +22,5 @@ function [i,erro,x] = jacob(A,b,p,imax)
         xold = x;
         i = i+1;
     end
+    
 endfunction
